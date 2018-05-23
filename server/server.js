@@ -15,7 +15,7 @@ function requestHandler(request, response) {
     url.parse(request.url).pathname // path to resource requested by client
   );
 
-  // use the existing method of the fs module to check if the requestedResource
+  // use the exists method of the fs module to check if the requestedResource 
   // exists.
   fs.exists(requestedResource, function(exists) {
     // check if file does't exist and return a 404 status (File not found)
@@ -26,28 +26,30 @@ function requestHandler(request, response) {
       return;
     }
 
-    // Check if the requested resource is a directory. If it is, just set our
+    // Check if the reqested resource is a directory. If it is, just set our
     // index.html page as the requested resource.
     if (fs.statSync(requestedResource).isDirectory()) {
       requestedResource += '/index.html';
     }
-
-    // Finally, we read the requested file (asynchronously) and send it's
+    
+    // Finally, we read the requested file (asynchronously) and send it's 
     // content to the client
     fs.readFile(
       requestedResource, // path to requested resource
       "binary", // read the requested resource as a binary file
       function(err, file) { // call back function to handle end of file reading
 
-      // If an error occured while reading the file, send the error message with a status code of 500 (Internal server error)
-      if (err) {
+      // If an error occured while reading the file, send the error message 
+      // with a status code of 500 (Internal server error)
+      if (err) {        
         response.writeHead(500, {"Content-Type": "text/plain"});
         response.write(err + "\n");
         response.end();
         return;
       }
 
-      // Helper object to map requested content types (extension) to response mime types
+      // Helper object to map requested content types (extension) to response 
+      // mime types
       const contentTypesByExtension = {
         '.html': "text/html",
         '.css':  "text/css",
@@ -61,7 +63,7 @@ function requestHandler(request, response) {
         path.extname(requestedResource)
       ];
 
-      // if the requested resource maps to any of our content type extension,
+      // if the requested resource maps to any of our content type extension, 
       // then set the Content-Type field for our response headers.
       if (contentType) {
         headers["Content-Type"] = contentType;
