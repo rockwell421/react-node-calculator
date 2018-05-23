@@ -1,6 +1,7 @@
 import React from 'react'; // import react module
 import Screen from './screen'; // Import our screen component from this directory
 import Button from './button'; // Import our button component from this directory
+import PropTypes from 'prop-types';
 
 // create a class which extends react component
 class Frame extends React.Component {
@@ -17,13 +18,13 @@ class Frame extends React.Component {
   }
 
   // Render function to creat component to be rendered on the DOM.
-  // This method must return a single parent element as you can see here. 
+  // This method must return a single parent element as you can see here.
   // The component is wrapped around () to make it a single expression.
   render() {
     return (
       <div className="frame">
         <div className="calculator-title">
-          R_N Calculator
+            <h2>React Calculator</h2>
         </div>
         <Screen question={this.state.question} answer={this.state.answer}/>
         <div className="button-row">
